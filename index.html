@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kian Hernando</title>
+    <link rel="icon" href="./assets/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="background"></div>
+            <div class="background-fade"></div>
+            <nav>
+                <div class="nav-left">
+                    <img class="logo" src="./assets/logo.png">
+                </div>
+                <div class="nav-center">
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a>Skills</a>
+                </div>
+                <div class="nav-right">
+                    <a class="contact" href="https://linkedin.com/in/kian-hernando/" target="_blank">Connect with me!</a>
+                </div>
+            </nav>
+            <div class="nameplate">
+                <h1 class="name">
+                    Hi, I'm<span id="typed"></span>
+                </h1>
+                <div class="bio">
+                    <span>
+                        I am a student at CSU Bakersfield, majoring in Computer Science!
+                        I am passionate about creating new solutions and experiences for
+                        people through coding!
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel" id="row1">
+                <img src="./assets/images/C.png" alt="C"></img>
+                <img src="./assets/images/C++.png" alt="C++"></img>
+                <img src="./assets/images/HTML5.png" alt="HTML5"></img>
+                <img src="./assets/images/CSS3.png" alt="CSS3"></img>
+                <img src="./assets/images/JavaScript.png" alt="JavaScript"></img>
+                <img src="./assets/images/Java.png" alt="Java"></img>
+                <img src="./assets/images/Python.png" alt="Python"></img>
+                <img src="./assets/images/React.png" alt="React.js"></img>
+                <img src="./assets/images/MySQL.png" alt="MySQL"></img>
+                <img src="./assets/images/PHP.png" alt="PHP"></img>
+            </div>
+        </div>
+    </div>
+    <div class="plain-background">
+        <div id="about">
+            <h2>About me!</h2>
+            <p>
+                Graduating high school in 2020, I decided to pursue a degree in Nursing at CSU Bakersfield.
+                During those 3 years of Nursing, I realized that Nursing didn't fulfill my passion for creativity.
+                After debating heavily, I decided to ultimately pursue the career of <b>Computer Science</b>,
+                all thanks to a suggestion from a friend.
+            </p>
+            <p>
+                I started my first coding class in the Fall of 2023, and I instantly got hooked. I loved the idea of <b>creating usable apps,
+                programs, and websites</b> through coding languages, and the more the projects became challenging and complex, the more I was
+                willing to create a solution. I love <b>collaborating</b>, and working in a team with like-minded individuals gives me the energy
+                and passion to create amazing projects with others!
+            </p>
+            <p>
+                Right now, I am currently trying to seek a Software Engineer <b>internship</b> to learn more about how people who are driven, just
+                like me, work in a <b>fast-paced environment.</b> Being an intern would really give me the experience needed to further empower my
+                drive to create projects that truly matter to people all around the world.
+            </p>
+            <p>
+                Outside of programming and school, I love to learn new languages and travel around the world! I am currently learning Japanese
+                and I plan to study abroad in Japan before I graduate from school. Besides Japan, I've been to Canada, Mexico, Philippines, and
+                South Korea! Aside from travelling, I also love playing video games and hanging out with my friends and family!
+            </p>
+        </div>
+    </div>
+    <div class="grid-background">
+        <div id="projects">
+            <h2>What I've worked on!</h2>
+            <a class="card-link" href="https://github.com/kianhernando/Janken-Game" target="_blank">
+                <div class="project-card" id="1">
+                    <video src="./assets/videos/janken.mov" autoplay loop muted></video>
+                    <div class="project-text">
+                        <h3>ジャンケン - A One-Handed Journey</h3>
+                        <div class="tech-stack">
+                            <span class="tech-bubble">X11</span>
+                            <span class="tech-bubble">OpenGL</span>
+                            <span class="tech-bubble">C++</span>
+                        </div>
+                        <span>Janken: A One-Handed Journey is an automatic 2D turn-based RPG with a unique combat system,
+                            based on Rock-Paper-Scissors, with unique enemies, pixelated sprites,
+                            and a simple progression system.</span>
+                    </div>
+                </div>
+            </a>
+            <a class="card-link" href="https://github.com/kianhernando/TCGPackOpener" target="_blank">
+                <div class="project-card" id="2">
+                    <video src="./assets/videos/tcgpackopener.mov" autoplay loop muted></video>
+                    <div class="project-text">
+                        <h3>Pokémon TCG Pack Opener</h3>
+                        <div class="tech-stack">
+                            <span class="tech-bubble">React.js</span>
+                            <span class="tech-bubble">PostgresSQL</span>
+                            <span class="tech-bubble">PokeAPI</span>
+                        </div>
+                        <span>A simulated Pokémon trading card pack opener that is integrated with third-party API, PokeAPI,
+                                to generate and collect Pokémon cards. Each card can come out as a shiny variant, as well as
+                                their attributes.</span>
+                    </div>
+                </div>
+            </a>
+            <a class="card-link" href="https://github.com/BradenStitt/Cook-It-Up/" target="_blank">
+                <div class="project-card" id="3">
+                    <video src="./assets/videos/openai.mp4" autoplay loop muted></video>
+                    <div class="project-text">
+                        <h3>Cook It Up</h3>
+                        <div class="tech-stack">
+                            <span class="tech-bubble">Expo</span>
+                            <span class="tech-bubble">React Native</span>
+                            <span class="tech-bubble">SQLite</span>
+                            <span class="tech-bubble">OpenAI</span>
+                        </div>
+                        <span>A mobile app that leverages OpenAI to generate personalized recipes based on infinite number of
+                            user-inputted ingredients, dietary restrictions, and preferences. Recipes are provided as step-by-step within
+                            the app and can be stored.</span>
+                    </div>
+                </div>
+            </a>
+            <a class="card-link" href="https://kianhernando.com/typr" target="_blank">
+                <div class="project-card" id="4">
+                    <video src="./assets/videos/typr.mov" autoplay loop muted></video>
+                    <div class="project-text">
+                        <h3>typr. - a typing test</h3>
+                        <div class="tech-stack">
+                            <span class="tech-bubble">HTML5</span>
+                            <span class="tech-bubble">CSS3</span>
+                            <span class="tech-bubble">JavaScript</span>
+                        </div>
+                        <span>typr. is a web-based typing speed application, similar to Monkeytype. typr. features real-time accuracy
+                            tracking, customized word amounts, simulated keyboard sounds, and a minimal UI.</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
