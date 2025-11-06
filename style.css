@@ -462,8 +462,10 @@ p {
 }
 
 #link {
-    float: right;
+    display: flex;
+    justify-content: flex-end;
     padding-right: 20px;
+    margin-top: 2rem;
 }
 
 h4 {
@@ -487,9 +489,18 @@ h4::after {
     transition: opacity 300ms, transform 300ms;
 }
 
+@keyframes wiggle {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
 .arrow {
     font-size: 1.8rem;
-    transition: opacity 300ms, transform 300ms;
+    animation: wiggle 1.5s ease-in-out infinite;
 }
 
 .hover-underline {
@@ -507,7 +518,12 @@ h4::after {
 }
 
 .hover-underline:hover .arrow {
-    transform: translateX(4px);
+    transform: translateX(10px);
+}
+
+.hover-underline:not(:hover) .arrow {
+    animation: wiggle 1.5s ease-in-out infinite;
+    transition: none;
 }
 
 .hover-underline:hover h4::after {
@@ -521,7 +537,57 @@ h4::after {
     transition: opacity 100ms, transform 100ms;
 }
 
-.arrow {
-    font-size: 1.8rem;
-    transition: opacity 300ms, transform 300ms;
+#skills {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 4rem 2rem;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+#skills h2 {
+    margin-bottom: 3rem;
+}
+
+.category-title {
+    font-size: 1.6rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+.skill-card {
+    background: linear-gradient(to bottom, #2a2a2a 0%, #101010 100%);
+    border: 1px solid #3d3d3d;
+    border-radius: 15px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    background: linear-gradient(to bottom, #373737 0%, #1d1d1d 100%);
+    border-color: #5e5e5e;
+    transform: translateY(-5px);
+}
+
+.skill-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.skill-card h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: white;
+    text-align: center;
 }

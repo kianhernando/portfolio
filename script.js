@@ -14,7 +14,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // typing animation
 const name = document.getElementById("typed");
-const words = [" a Developer", " an Engineer", " Kian!"];
+const words = [" a Developer", " an Engineer", " Kian Hernando"];
 let text = 0;
 let char = 0;
 let typing = true;
