@@ -15,13 +15,16 @@ Unreal Engine, Express, React, Expo, Astro, Flask, React Native, JQuery
 
 # 📂 What I've Worked On
 
-### Janken – A One-Handed Journey | *C++, OpenGL, X11*  
+### Janken – A One-Handed Journey
+#### C++, OpenGL, X11
 A role-playing combat game featuring dynamic sprite rendering, modular gameplay logic, and smooth visuals.  
 
-### TCG Pack Opener | *React, Supabase, SQL, PokeAPI*  
+### TCG Pack Opener
+#### React, Supabase, SQL, PokeAPI 
 A web app that simulates Pokémon card packs using a third-party API with user authentication and data saving.  
 
-### Cook It Up | *Expo, React Native, TypeScript, OpenAI*  
+### Cook It Up 
+#### Expo, React Native, TypeScript, OpenAI 
 A mobile app that generates personalized recipes based on user-inputted ingredients and dietary preferences.  
 
 # 📬 Contact Me  
