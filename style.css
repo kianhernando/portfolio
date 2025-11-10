@@ -210,12 +210,15 @@ nav a,
     flex-direction: column;
     justify-content: center;
     gap: 1.5rem;
+    padding: 0;
+    margin: 0;
 }
 
 h1 {
     font-size: 5rem;
     margin: 0;
     text-align: center;
+    line-height: 1.2;
 }
 
 #typed {
@@ -241,6 +244,7 @@ h1 {
     font-size: 2rem;
     margin: 0 auto;
     text-align: center;
+    line-height: 1.4;
 }
 
 .carousel-container {
@@ -292,18 +296,6 @@ h1 {
     transition: transform 0.3s;
 }
 
-@media (max-width: 768px) {
-    .carousel img {
-        height: 60px;
-    }
-}
-
-@media (max-width: 480px) {
-    .carousel img {
-        height: 50px;
-    }
-}
-
 .carousel img:hover {
     transform: scale(1.1);
 }
@@ -340,6 +332,80 @@ p {
     z-index: 5;
 }
 
+.about-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    width: 40%;
+    min-width: 300px;
+    max-width: 400px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border: 1px solid #3a3a3a;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.info-card:hover {
+    background: linear-gradient(135deg, #373737 0%, #1d1d1d 100%);
+    border-color: #5e5e5e;
+    transform: translateY(-2px);
+}
+
+.info-card-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.info-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-value {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 500;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #3a3a3a, transparent);
+}
+
+.about-description {
+    flex: 1;
+}
+
+p {
+    margin-top: 0px;
+}
+
 .grid-background {
     position: relative;
     width: 100%;
@@ -365,7 +431,6 @@ p {
         var(--color) var(--gap)
       );
     background-size: 100% 100%, var(--gap) var(--gap), var(--gap) var(--gap);
-    padding-bottom: 4rem;
 }
 
 #projects {
@@ -556,7 +621,7 @@ h4::after {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
     width: 100%;
 }
