@@ -1,8 +1,11 @@
-# 🚀 About Me  
+# Kian Hernando's Portfolio Website
+
+## About me
+
 Hi there, I'm Kian! I used to be a Nursing student, but now I am studying Computer Science at Cal State Bakersfield! I love creating impactful apps and websites that are beneficial for others, while being fun to use!
 
+## Technical Skills
 
-# 🛠 My Tech Stack!
 ### Coding Languages
 C, C++, Python, Java, HTML/CSS, JavaScript, TypeScript, SQL, PHP  
 
@@ -10,10 +13,9 @@ C, C++, Python, Java, HTML/CSS, JavaScript, TypeScript, SQL, PHP
 Git, Visual Studio Code, IntelliJ, Android Studio, Vim, Linux  
 
 ### Frameworks
-Unreal Engine, Express, React, Expo, Astro, Flask, React Native, JQuery  
+Express, React, Expo, Astro, Flask, React Native
 
-
-# 📂 What I've Worked On
+## Projects
 
 ### Janken – A One-Handed Journey
 #### C++, OpenGL, X11
@@ -27,8 +29,9 @@ A web app that simulates Pokémon card packs using a third-party API with user a
 #### Expo, React Native, TypeScript, OpenAI 
 A mobile app that generates personalized recipes based on user-inputted ingredients and dietary preferences.  
 
-# 📬 Contact Me  
-Feel free to reach out!
+## Contact
+
 - Email: [kianhernandowork@gmail.com]  
 - LinkedIn: [https://linkedin.com/in/kian-hernando](https://linkedin.com/in/kian-hernando)  
 - GitHub: [https://github.com/kianhernando](https://github.com/kianhernando)  
+
