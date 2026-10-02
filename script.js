@@ -64,3 +64,21 @@ document.querySelectorAll(".carousel").forEach(carousel => {
         });
     }
 });
+
+// ------------------------------------------------------------------
+
+// dropdown toggle
+const toggle = document.querySelector('.dropdown-toggle');
+const menu   = document.querySelector('.dropdown-menu');
+
+toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+});
+
+// close when clicking outside
+document.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+});
