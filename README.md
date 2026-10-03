@@ -7,13 +7,13 @@ Hi there, I'm Kian! I used to be a Nursing student, but now I am studying Comput
 ## Technical Skills
 
 ### Coding Languages
-C, C++, Python, Java, HTML/CSS, JavaScript, TypeScript, SQL, PHP  
+C, C++, Python, HTML/CSS, JavaScript, TypeScript, SQL, PHP  
 
 ### Developer Tools
-Git, Visual Studio Code, IntelliJ, Vim, Linux  
+Git, Visual Studio Code, Vim, Linux, Godot, Blender  
 
 ### Frameworks
-React, Astro, Express, Flask, OpenGL  
+React, Astro, Express, OpenGL  
 
 ## Projects
 
