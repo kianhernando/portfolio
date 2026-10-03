@@ -1401,25 +1401,6 @@ span.todo {
         filter: blur(6px);
     }
 
-    .js [data-reveal="unveil"]:not(.is-visible) {
-        opacity: 1;
-        transform: none;
-        filter: none;
-    }
-
-    .js [data-reveal="unveil"] > * {
-        clip-path: inset(0 0 0 0);
-        transform: none;
-        transition:
-            clip-path 1.2s var(--ease-out),
-            transform 1.4s var(--ease-out);
-    }
-
-    .js [data-reveal="unveil"]:not(.is-visible) > * {
-        clip-path: inset(100% 0 0 0);
-        transform: scale(1.08);
-    }
-
     ::view-transition-group(*) {
         animation-duration: 0.6s;
         animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
