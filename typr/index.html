@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typr - a typing test</title>
+    <script src="typr.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2 id="header">typr - a typing test</h2>
+    <nav>
+        <a class="active" href="typr.html">typr</a>
+        <span id="theme">dark</span>
+    </nav>
+    <a id="back" href="https://kianhernando.com">back to my portfolio/a>
+    <div id="container">
+        <div id="toggleOptions">
+            <span id="wordTitle" class="toggle active">words</span>
+            <span id="timeTitle" class="toggle">time</span>
+        </div>
+        <div id="options">
+            <div id="amtWord">
+                <span class="button" id="10">10</span>
+                <span id="divider">|</span>
+                <span class="button" id="25">25</span>
+                <span id="divider">|</span>
+                <span class="button" id="50">50</span>
+                <span id="divider">|</span>
+                <span class="button" id="75">75</span>
+                <span id="divider">|</span>
+                <span class="button" id="100">100</span>
+            </div>
+
+            <div id="amtTime" class="hidden">
+                <span class="button" id="15">15</span>
+                <span id="divider">|</span>
+                <span class="button" id="30">30</span>
+                <span id="divider">|</span>
+                <span class="button" id="45">45</span>
+                <span id="divider">|</span>
+                <span class="button" id="60">60</span>
+            </div>
+        </div>
+        <div id="stats">
+            <div id="timer"></div>
+            <div id="wpm">wpm:</div>
+        </div>
+        <p id="wordDisplay"></p>
+        <div id="input">
+            <p id="wordInput"></p>
+            <button id="redo">redo</button>
+        </div>
+    </div>
+</body>
+
+</html>
