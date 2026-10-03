@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickQR: Dynamic QR Code Generator | Kian Hernando</title>
+    <meta name="description" content="QuickQR is a web app for creating static and dynamic QR codes, customizing their design, and tracking scan analytics. Built with Astro, React, and Supabase.">
+    <meta name="author" content="Kian Hernando">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="https://kianhernando.com/projects/quickqr.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Kian Hernando">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="QuickQR: Dynamic QR Code Generator | Kian Hernando">
+    <meta property="og:description" content="QuickQR is a web app for creating static and dynamic QR codes, customizing their design, and tracking scan analytics. Built with Astro, React, and Supabase.">
+    <meta property="og:url" content="https://kianhernando.com/projects/quickqr.html">
+    <meta property="og:image" content="https://kianhernando.com/assets/og/quickqr.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="QuickQR project by Kian Hernando">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QuickQR: Dynamic QR Code Generator | Kian Hernando">
+    <meta name="twitter:description" content="QuickQR is a web app for creating static and dynamic QR codes, customizing their design, and tracking scan analytics. Built with Astro, React, and Supabase.">
+    <meta name="twitter:image" content="https://kianhernando.com/assets/og/quickqr.jpg">
+    <meta name="twitter:image:alt" content="QuickQR project by Kian Hernando">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <link rel="preload" href="../assets/font.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <script>document.documentElement.classList.add("js");</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CreativeWork",
+                "@id": "https://kianhernando.com/projects/quickqr.html#project",
+                "name": "QuickQR",
+                "description": "QuickQR is a web app for creating static and dynamic QR codes, customizing their design, and tracking scan analytics. Built with Astro, React, and Supabase.",
+                "url": "https://kianhernando.com/projects/quickqr.html",
+                "image": "https://kianhernando.com/assets/og/quickqr.jpg",
+                "keywords": "Astro, React, TypeScript, Supabase, QR codes",
+                "author": {
+                    "@type": "Person",
+                    "name": "Kian Hernando",
+                    "url": "https://kianhernando.com/"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://kianhernando.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Projects",
+                        "item": "https://kianhernando.com/#projects"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "QuickQR",
+                        "item": "https://kianhernando.com/projects/quickqr.html"
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+</head>
+<body class="case-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 256 256"><path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 256 256"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 256 256"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 256 256"><path d="M216,48V208a16,16,0,0,1-16,16H160a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h40A16,16,0,0,1,216,48ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Z"/></symbol>
+</svg>
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="scroll-sentinel" data-scroll-sentinel aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+        <nav class="nav container" aria-label="Primary">
+            <a class="nav-logo" href="../index.html" aria-label="Kian Hernando, home">
+                <img src="../assets/logo.webp" alt="" width="40" height="35">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#skills">Skills</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a class="btn btn-ghost btn-sm" href="../assets/Kian%20Hernando.pdf" target="_blank" rel="noopener">Résumé</a>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+                    <svg class="icon icon-menu icon-menu" aria-hidden="true"><use href="#i-menu"></use></svg>
+                    <svg class="icon icon-close icon-close" aria-hidden="true"><use href="#i-close"></use></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-menu-links" aria-label="Mobile">
+            <a href="../index.html#about" style="--i: 0">About</a>
+            <a href="../index.html#projects" style="--i: 1">Projects</a>
+            <a href="../index.html#skills" style="--i: 2">Skills</a>
+            <a href="../index.html#contact" style="--i: 3">Contact</a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <a class="btn btn-primary" href="../assets/Kian%20Hernando.pdf" target="_blank" rel="noopener"><svg class="icon icon-file" aria-hidden="true"><use href="#i-file"></use></svg> Résumé</a>
+            <a class="btn btn-ghost" href="https://github.com/kianhernando" target="_blank" rel="noopener"><svg class="icon icon-github" aria-hidden="true"><use href="#i-github"></use></svg> GitHub</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/kian-hernando/" target="_blank" rel="noopener"><svg class="icon icon-linkedin" aria-hidden="true"><use href="#i-linkedin"></use></svg> LinkedIn</a>
+        </div>
+    </div>
+
+    <main id="main">
+        <header class="case-header container">
+            <a class="text-link case-back" href="../index.html#projects"><svg class="icon icon-arrow-left" aria-hidden="true"><use href="#i-arrow-left"></use></svg> All projects</a>
+            <h1 class="case-title">QuickQR</h1>
+            <p class="case-lede">A QR code platform for creating static and dynamic codes, customizing how they look, and tracking every scan.</p>
+            <dl class="case-meta">
+                <div><dt>Role</dt><dd><span class="todo">Work in Progress</span></dd></div>
+                <div><dt>Timeline</dt><dd><span class="todo">Work in Progress</span></dd></div>
+                <div><dt>Team</dt><dd><span class="todo">Work in Progress</span></dd></div>
+                <div><dt>Stack</dt><dd>Astro, React, TypeScript, Supabase</dd></div>
+            </dl>
+            <div class="case-actions">
+                    <a class="btn btn-primary" href="https://quickqr.app" target="_blank" rel="noopener">Visit quickqr.app <svg class="icon icon-arrow-up-right" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="case-hero" style="view-transition-name: media-quickqr">
+                <video data-autoplay data-hero-video muted loop playsinline preload="metadata" poster="../assets/posters/quickqr.webp" width="3184" height="1978" aria-label="Screen recording of QuickQR">
+                    <source src="../assets/videos/quickqr.webm" type="video/webm">
+                </video>
+                <button class="media-toggle" type="button" data-media-toggle aria-label="Pause video">
+                    <svg class="icon icon-pause icon-pause" aria-hidden="true"><use href="#i-pause"></use></svg><svg class="icon icon-play icon-play" aria-hidden="true"><use href="#i-play"></use></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="container case-body">
+            <nav class="case-toc" aria-label="On this page">
+                <p>On this page</p>
+                    <a href="#overview">Overview</a>
+                    <a href="#problem">The problem</a>
+                    <a href="#built">What I built</a>
+                    <a href="#highlights">Technical highlights</a>
+                    <a href="#learned">What I learned</a>
+                    <a href="#gallery">Gallery</a>
+            </nav>
+            <div class="case-content">
+                <section class="case-section" id="overview" aria-labelledby="overview-title" data-reveal>
+                    <h2 id="overview-title">Overview</h2>
+                    <p>QuickQR is a QR code generator that uses third-party APIs to create <strong>static and dynamic QR codes</strong>, with full control over how each code looks. Signed-in users can track usage and see statistics for every scan.</p>
+                </section>
+
+                <section class="case-section" id="problem" aria-labelledby="problem-title" data-reveal>
+                    <h2 id="problem-title">The problem</h2>
+                    <p class="todo">Work in Progress</p>
+                </section>
+
+                <section class="case-section" id="built" aria-labelledby="built-title" data-reveal>
+                    <h2 id="built-title">What I built</h2>
+                    <ul class="feature-list">
+                        <li><strong>Static and dynamic codes.</strong> Codes are generated through third-party APIs; dynamic codes can change destination after they are printed.</li>
+                        <li><strong>Full customization</strong> of each code's appearance.</li>
+                        <li><strong>Scan analytics.</strong> Every code tracks its scans, with per-code statistics.</li>
+                        <li><strong>A dashboard</strong> for active and expired codes, with search, scan counts, and per-code actions.</li>
+                        <li><strong>Accounts</strong> with settings and billing pages.</li>
+                    </ul>
+                </section>
+
+                <section class="case-section" id="highlights" aria-labelledby="highlights-title" data-reveal>
+                    <h2 id="highlights-title">Technical highlights</h2>
+                    <p class="todo">Work in Progress</p>
+                </section>
+
+                <section class="case-section" id="learned" aria-labelledby="learned-title" data-reveal>
+                    <h2 id="learned-title">What I learned</h2>
+                    <p class="todo">Work in Progress</p>
+                </section>
+
+                <section class="case-section" id="gallery" aria-labelledby="gallery-title" data-reveal>
+                    <h2 id="gallery-title">Gallery</h2>
+                    <div class="gallery">
+                        <figure class="wide">
+                            <div class="media-slot">Work in Progress</div>
+                        </figure>
+                        <figure>
+                            <div class="media-slot">Work in Progress</div>
+                        </figure>
+                        <figure>
+                            <div class="media-slot">Work in Progress</div>
+                        </figure>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="container case-next">
+            <a class="next-link" href="janken.html">
+                <div>
+                    <p class="next-label">Next project</p>
+                    <p class="next-title">Janken <svg class="icon icon-arrow-right" aria-hidden="true"><use href="#i-arrow-right"></use></svg></p>
+                </div>
+                <div class="project-media" style="view-transition-name: media-janken">
+                    <img src="../assets/posters/janken.webp" alt="" width="574" height="322" loading="lazy">
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>&copy; <span data-year>2026</span> Kian Hernando</p>
+            <ul class="footer-links">
+                <li><a href="https://github.com/kianhernando" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/kian-hernando/" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="mailto:kianhernandowork@gmail.com">E-mail</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
