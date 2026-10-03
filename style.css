@@ -921,10 +921,14 @@ body.menu-open .site-header {
 }
 
 .contact-copy {
-    max-width: 46ch;
+    max-width: 76ch;
     margin: 1.5rem auto 0;
     color: var(--text-2);
     font-size: 1.125rem;
+}
+
+.contact-copy span {
+    display: block;
 }
 
 .contact-email {
