@@ -1,48 +1,145 @@
-document.documentElement.classList.add("js");
+const root = document.documentElement;
+
+root.classList.add("js");
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+const JA = window.JA || {};
+const RUBY = /\{([^|{}]+)\|([^{}]+)\}/g;
+const localized = [];
+let lang = root.lang === "ja" ? "ja" : "en";
+
+const ruby = (source) => source.replace(RUBY, "<ruby>$1<rt>$2</rt></ruby>");
+const html = (key, en) => (lang === "ja" && key in JA ? ruby(JA[key]) : en);
+const text = (key, en) => (lang === "ja" && key in JA ? JA[key].replace(RUBY, "$1") : en);
+
+document.querySelectorAll("body [data-i18n]").forEach((el) => {
+    const en = el.innerHTML;
+    localized.push(() => (el.innerHTML = html(el.dataset.i18n, en)));
+});
+
+["aria-label", "alt"].forEach((attr) => {
+    document.querySelectorAll(`[data-i18n-${attr}]`).forEach((el) => {
+        const key = el.getAttribute(`data-i18n-${attr}`);
+        const en = el.getAttribute(attr);
+        localized.push(() => el.setAttribute(attr, text(key, en)));
+    });
+});
+
+const pageTitle = document.querySelector("title[data-i18n]");
+
+if (pageTitle) {
+    const en = document.title;
+    localized.push(() => (document.title = text(pageTitle.dataset.i18n, en)));
+}
+
+if (lang === "ja") localized.forEach((update) => update());
+root.classList.add("i18n-ready");
+
+function savedLang() {
+    try {
+        return localStorage.getItem("lang") === "ja" ? "ja" : "en";
+    } catch {
+        return lang;
+    }
+}
+
+function setLang(next) {
+    const probe = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
+    const anchor = (probe && probe.closest("[data-i18n]")) || probe;
+    const top = anchor ? anchor.getBoundingClientRect().top : 0;
+
+    lang = next;
+    root.lang = lang;
+    try {
+        localStorage.setItem("lang", lang);
+    } catch {}
+    localized.forEach((update) => update());
+
+    if (anchor) {
+        window.scrollBy({ top: anchor.getBoundingClientRect().top - top, behavior: "instant" });
+    }
+}
+
+const langSwitch = document.querySelector("[data-lang-switch]");
+
+if (langSwitch) {
+    const sync = () => langSwitch.setAttribute("aria-checked", String(lang === "ja"));
+
+    langSwitch.addEventListener("click", () => setLang(lang === "ja" ? "en" : "ja"));
+    localized.push(sync);
+    sync();
+
+    const footer = document.querySelector(".site-footer");
+
+    if (footer && "IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+            langSwitch.classList.toggle("is-docked", entry.isIntersecting);
+        }).observe(footer);
+    }
+}
+
+window.addEventListener("pageshow", (e) => {
+    if (e.persisted && savedLang() !== lang) setLang(savedLang());
+});
 
 const typed = document.getElementById("typed");
 
 if (typed) {
-    const words = ["a Developer", "an Engineer", "Kian!"];
-    let text = 0;
+    const getWords = () =>
+        (lang === "ja" ? JA["hero.typed"] : ["a Developer", "an Engineer", "Kian!"]).map((word) =>
+            word.match(/\{[^{}]*\}|./gu).map(ruby)
+        );
+    let words = getWords();
+    let word = 0;
     let char = 0;
     let typing = true;
+    let timer;
+
+    const show = (count) => (typed.innerHTML = words[word].slice(0, count).join(""));
 
     function type() {
-        const currentText = words[text];
+        const length = words[word].length;
 
         if (typing) {
-            if (char < currentText.length) {
+            if (char < length) {
                 char++;
-                typed.textContent = currentText.slice(0, char);
-                setTimeout(type, 120 + Math.random() * 60);
+                show(char);
+                timer = setTimeout(type, 120 + Math.random() * 60);
             } else {
                 typing = false;
-                if (text === words.length - 1) return;
-                setTimeout(type, 1800);
+                if (word === words.length - 1) return;
+                timer = setTimeout(type, 1800);
             }
         } else {
             if (char > 0) {
                 char--;
-                typed.textContent = currentText.slice(0, char);
-                setTimeout(type, 55);
+                show(char);
+                timer = setTimeout(type, 55);
             } else {
                 typing = true;
-                text++;
-                setTimeout(type, 450);
+                word++;
+                timer = setTimeout(type, 450);
             }
         }
     }
 
-    const intro = document.documentElement.classList.contains("intro");
+    function finish() {
+        clearTimeout(timer);
+        words = getWords();
+        word = words.length - 1;
+        show(words[word].length);
+    }
+
+    const intro = root.classList.contains("intro");
 
     if (reduceMotion.matches || !intro) {
-        typed.textContent = words[words.length - 1];
+        finish();
     } else {
-        setTimeout(type, 700);
+        timer = setTimeout(type, 700);
     }
+
+    localized.push(finish);
 }
 
 const header = document.querySelector("[data-header]");
@@ -61,7 +158,7 @@ const inertTargets = document.querySelectorAll("main, footer");
 function setMenu(open) {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    toggle.setAttribute("aria-label", open ? text("menu.close", "Close menu") : text("menu.open", "Open menu"));
     menu.classList.toggle("is-open", open);
     document.body.classList.toggle("menu-open", open);
     inertTargets.forEach((el) => (el.inert = open));
@@ -86,6 +183,9 @@ if (toggle && menu) {
     window.matchMedia("(min-width: 861px)").addEventListener("change", (e) => {
         if (e.matches) setMenu(false);
     });
+
+    localized.push(() => setMenu(menu.classList.contains("is-open")));
+    setMenu(false);
 }
 
 function spy(links) {
@@ -162,7 +262,10 @@ document.querySelectorAll("[data-media-toggle]").forEach((button) => {
 
     const sync = () => {
         button.classList.toggle("is-paused", video.paused);
-        button.setAttribute("aria-label", video.paused ? "Play video" : "Pause video");
+        button.setAttribute(
+            "aria-label",
+            video.paused ? text("video.play", "Play video") : text("video.pause", "Pause video")
+        );
     };
 
     button.addEventListener("click", () => {
@@ -177,6 +280,7 @@ document.querySelectorAll("[data-media-toggle]").forEach((button) => {
 
     video.addEventListener("play", sync);
     video.addEventListener("pause", sync);
+    localized.push(sync);
     sync();
 });
 
@@ -192,11 +296,14 @@ if (copyBtn) {
         try {
             await navigator.clipboard.writeText(value);
             copyBtn.classList.add("is-copied");
-            label.textContent = "Copied";
-            copyStatus.textContent = "E-mail address copied to clipboard.";
+            label.innerHTML = html("copy.done", "Copied");
+            copyStatus.textContent = text("copy.status.done", "E-mail address copied to clipboard.");
         } catch {
-            label.textContent = "Press Ctrl+C";
-            copyStatus.textContent = "Couldn't copy automatically. Select the address and copy it.";
+            label.innerHTML = html("copy.manual", "Press Ctrl+C");
+            copyStatus.textContent = text(
+                "copy.status.failed",
+                "Couldn't copy automatically. Select the address and copy it."
+            );
             const range = document.createRange();
             range.selectNodeContents(document.querySelector("[data-copy-target]"));
             const selection = window.getSelection();
@@ -206,7 +313,7 @@ if (copyBtn) {
         clearTimeout(resetTimer);
         resetTimer = setTimeout(() => {
             copyBtn.classList.remove("is-copied");
-            label.textContent = "Copy";
+            label.innerHTML = html("copy", "Copy");
         }, 2200);
     });
 }

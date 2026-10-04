@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon TCG Pack Opener, a React Web App | Kian Hernando</title>
+    <title data-i18n="tcg.title">Pokémon TCG Pack Opener, a React Web App | Kian Hernando</title>
     <meta name="description" content="A web app that simulates opening Pokémon card packs with live PokeAPI data, shiny variants, and saved collections. Built with React and Supabase.">
     <meta name="author" content="Kian Hernando">
     <meta name="robots" content="index, follow, max-image-preview:large">
@@ -29,7 +29,12 @@
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
     <link rel="preload" href="../assets/font.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="../style.css">
-    <script>document.documentElement.classList.add("js");</script>
+    <script>
+        document.documentElement.classList.add("js");
+        try {
+            if (localStorage.getItem("lang") === "ja") document.documentElement.lang = "ja";
+        } catch (e) { }
+    </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -76,7 +81,7 @@
     </script>
 </head>
 <body class="case-page">
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></symbol>
@@ -92,18 +97,18 @@
     <div class="scroll-sentinel" data-scroll-sentinel aria-hidden="true"></div>
 
     <header class="site-header" data-header>
-        <nav class="nav container" aria-label="Primary">
-            <a class="nav-logo" href="../index.html" aria-label="Kian Hernando, home">
+        <nav class="nav container" aria-label="Primary" data-i18n-aria-label="nav.primary">
+            <a class="nav-logo" href="../index.html" aria-label="Kian Hernando, home" data-i18n-aria-label="nav.home">
                 <img src="../assets/logo.webp" alt="" width="40" height="35">
             </a>
             <ul class="nav-links">
-                <li><a href="../index.html#about">About</a></li>
-                <li><a href="../index.html#projects">Projects</a></li>
-                <li><a href="../index.html#skills">Skills</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../index.html#about" data-i18n="nav.about">About</a></li>
+                <li><a href="../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+                <li><a href="../index.html#skills" data-i18n="nav.skills">Skills</a></li>
+                <li><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a class="btn btn-ghost btn-sm" href="../assets/Kian%20Hernando.pdf" target="_blank" rel="noopener">Résumé</a>
+                <a class="btn btn-ghost btn-sm" href="../assets/Kian%20Hernando.pdf" target="_blank" rel="noopener"><span data-i18n="resume">Résumé</span></a>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
                     <svg class="icon icon-menu icon-menu" aria-hidden="true"><use href="#i-menu"></use></svg>
                     <svg class="icon icon-close icon-close" aria-hidden="true"><use href="#i-close"></use></svg>
@@ -113,14 +118,14 @@
     </header>
 
     <div class="mobile-menu" id="mobile-menu">
-        <nav class="mobile-menu-links" aria-label="Mobile">
-            <a href="../index.html#about" style="--i: 0">About</a>
-            <a href="../index.html#projects" style="--i: 1">Projects</a>
-            <a href="../index.html#skills" style="--i: 2">Skills</a>
-            <a href="../index.html#contact" style="--i: 3">Contact</a>
+        <nav class="mobile-menu-links" aria-label="Mobile" data-i18n-aria-label="nav.mobile">
+            <a href="../index.html#about" style="--i: 0" data-i18n="nav.about">About</a>
+            <a href="../index.html#projects" style="--i: 1" data-i18n="nav.projects">Projects</a>
+            <a href="../index.html#skills" style="--i: 2" data-i18n="nav.skills">Skills</a>
+            <a href="../index.html#contact" style="--i: 3" data-i18n="nav.contact">Contact</a>
         </nav>
         <div class="mobile-menu-footer">
-            <a class="btn btn-primary" href="../assets/Kian%20Hernando.pdf" target="_blank" rel="noopener"><svg class="icon icon-file" aria-hidden="true"><use href="#i-file"></use></svg> Résumé</a>
+            <a class="btn btn-primary" href="../assets/Kian%20Hernando.pdf" target="_blank" rel="noopener"><svg class="icon icon-file" aria-hidden="true"><use href="#i-file"></use></svg> <span data-i18n="resume">Résumé</span></a>
             <a class="btn btn-ghost" href="https://github.com/kianhernando" target="_blank" rel="noopener"><svg class="icon icon-github" aria-hidden="true"><use href="#i-github"></use></svg> GitHub</a>
             <a class="btn btn-ghost" href="https://www.linkedin.com/in/kian-hernando/" target="_blank" rel="noopener"><svg class="icon icon-linkedin" aria-hidden="true"><use href="#i-linkedin"></use></svg> LinkedIn</a>
         </div>
@@ -128,23 +133,23 @@
 
     <main id="main">
         <header class="case-header container">
-            <a class="text-link case-back" href="../index.html#projects"><svg class="icon icon-arrow-left" aria-hidden="true"><use href="#i-arrow-left"></use></svg> All projects</a>
+            <a class="text-link case-back" href="../index.html#projects"><svg class="icon icon-arrow-left" aria-hidden="true"><use href="#i-arrow-left"></use></svg> <span data-i18n="case.back">All projects</span></a>
             <h1 class="case-title">Pokémon TCG Pack Opener</h1>
-            <p class="case-lede">Simulated Pokémon card pack openings, with shiny variants and a collection that saves.</p>
+            <p class="case-lede" data-i18n="tcg.lede">Simulated Pokémon card pack openings, with shiny variants and a collection that saves.</p>
             <dl class="case-meta">
-                <div><dt>Role</dt><dd><span class="todo">Work in Progress</span></dd></div>
-                <div><dt>Timeline</dt><dd>Fall 2024</dd></div>
-                <div><dt>Team</dt><dd>2 contributors</dd></div>
-                <div><dt>Stack</dt><dd>React, Supabase, PostgreSQL, PokeAPI</dd></div>
+                <div><dt data-i18n="case.role">Role</dt><dd><span class="todo" data-i18n="case.wip">Work in Progress</span></dd></div>
+                <div><dt data-i18n="case.timeline">Timeline</dt><dd data-i18n="tcg.timeline">Fall 2024</dd></div>
+                <div><dt data-i18n="case.team">Team</dt><dd data-i18n="tcg.team">2 contributors</dd></div>
+                <div><dt data-i18n="case.stack">Stack</dt><dd>React, Supabase, PostgreSQL, PokeAPI</dd></div>
             </dl>
             <div class="case-actions">
-                    <a class="btn btn-primary" href="https://github.com/kianhernando/TCGPackOpener" target="_blank" rel="noopener"><svg class="icon icon-github" aria-hidden="true"><use href="#i-github"></use></svg> View source</a>
+                    <a class="btn btn-primary" href="https://github.com/kianhernando/TCGPackOpener" target="_blank" rel="noopener"><svg class="icon icon-github" aria-hidden="true"><use href="#i-github"></use></svg> <span data-i18n="case.source">View source</span></a>
             </div>
         </header>
 
         <div class="container">
             <div class="case-hero" style="view-transition-name: media-tcg-pack-opener">
-                <video data-autoplay data-hero-video muted loop playsinline preload="metadata" poster="../assets/posters/tcgpackopener.webp" width="3544" height="1992" aria-label="Screen recording of TCG Pack Opener">
+                <video data-autoplay data-hero-video muted loop playsinline preload="metadata" poster="../assets/posters/tcgpackopener.webp" width="3544" height="1992" aria-label="Screen recording of TCG Pack Opener" data-i18n-aria-label="tcg.video">
                     <source src="../assets/videos/tcgpackopener.webm" type="video/webm">
                 </video>
                 <button class="media-toggle" type="button" data-media-toggle aria-label="Pause video">
@@ -154,56 +159,56 @@
         </div>
 
         <div class="container case-body">
-            <nav class="case-toc" aria-label="On this page">
-                <p>On this page</p>
-                    <a href="#overview">Overview</a>
-                    <a href="#problem">The problem</a>
-                    <a href="#built">What I built</a>
-                    <a href="#highlights">Technical highlights</a>
-                    <a href="#learned">What I learned</a>
-                    <a href="#gallery">Gallery</a>
+            <nav class="case-toc" aria-label="On this page" data-i18n-aria-label="case.toc.label">
+                <p data-i18n="case.toc">On this page</p>
+                    <a href="#overview" data-i18n="case.overview">Overview</a>
+                    <a href="#problem" data-i18n="case.problem">The problem</a>
+                    <a href="#built" data-i18n="case.built">What I built</a>
+                    <a href="#highlights" data-i18n="case.highlights">Technical highlights</a>
+                    <a href="#learned" data-i18n="case.learned">What I learned</a>
+                    <a href="#gallery" data-i18n="case.gallery">Gallery</a>
             </nav>
             <div class="case-content">
                 <section class="case-section" id="overview" aria-labelledby="overview-title" data-reveal>
-                    <h2 id="overview-title">Overview</h2>
-                    <p>A simulated Pokémon trading card pack opener, integrated with the third-party <strong>PokeAPI</strong> to generate and collect cards. Each card can come out as a <strong>shiny variant</strong>, along with its attributes.</p>
+                    <h2 id="overview-title" data-i18n="case.overview">Overview</h2>
+                    <p data-i18n="tcg.overview">A simulated Pokémon trading card pack opener, integrated with the third-party <strong>PokeAPI</strong> to generate and collect cards. Each card can come out as a <strong>shiny variant</strong>, along with its attributes.</p>
                 </section>
 
                 <section class="case-section" id="problem" aria-labelledby="problem-title" data-reveal>
-                    <h2 id="problem-title">The problem</h2>
-                    <p class="todo">Work in Progress</p>
+                    <h2 id="problem-title" data-i18n="case.problem">The problem</h2>
+                    <p class="todo" data-i18n="case.wip">Work in Progress</p>
                 </section>
 
                 <section class="case-section" id="built" aria-labelledby="built-title" data-reveal>
-                    <h2 id="built-title">What I built</h2>
+                    <h2 id="built-title" data-i18n="case.built">What I built</h2>
                     <ul class="feature-list">
-                        <li><strong>Pack opening</strong> that generates cards from PokeAPI data.</li>
-                        <li><strong>Shiny variants</strong> and per-card attributes.</li>
-                        <li><strong>User accounts</strong> with authentication and a saved collection.</li>
+                        <li data-i18n="tcg.built1"><strong>Pack opening</strong> that generates cards from PokeAPI data.</li>
+                        <li data-i18n="tcg.built2"><strong>Shiny variants</strong> and per-card attributes.</li>
+                        <li data-i18n="tcg.built3"><strong>User accounts</strong> with authentication and a saved collection.</li>
                     </ul>
                 </section>
 
                 <section class="case-section" id="highlights" aria-labelledby="highlights-title" data-reveal>
-                    <h2 id="highlights-title">Technical highlights</h2>
-                    <p class="todo">Work in Progress</p>
+                    <h2 id="highlights-title" data-i18n="case.highlights">Technical highlights</h2>
+                    <p class="todo" data-i18n="case.wip">Work in Progress</p>
                 </section>
 
                 <section class="case-section" id="learned" aria-labelledby="learned-title" data-reveal>
-                    <h2 id="learned-title">What I learned</h2>
-                    <p class="todo">Work in Progress</p>
+                    <h2 id="learned-title" data-i18n="case.learned">What I learned</h2>
+                    <p class="todo" data-i18n="case.wip">Work in Progress</p>
                 </section>
 
                 <section class="case-section" id="gallery" aria-labelledby="gallery-title" data-reveal>
-                    <h2 id="gallery-title">Gallery</h2>
+                    <h2 id="gallery-title" data-i18n="case.gallery">Gallery</h2>
                     <div class="gallery">
                         <figure class="wide">
-                            <div class="media-slot">Work in Progress</div>
+                            <div class="media-slot"><span data-i18n="case.wip">Work in Progress</span></div>
                         </figure>
                         <figure>
-                            <div class="media-slot">Work in Progress</div>
+                            <div class="media-slot"><span data-i18n="case.wip">Work in Progress</span></div>
                         </figure>
                         <figure>
-                            <div class="media-slot">Work in Progress</div>
+                            <div class="media-slot"><span data-i18n="case.wip">Work in Progress</span></div>
                         </figure>
                     </div>
                 </section>
@@ -213,7 +218,7 @@
         <div class="container case-next">
             <a class="next-link" href="typr.html">
                 <div>
-                    <p class="next-label">Next project</p>
+                    <p class="next-label" data-i18n="case.next">Next project</p>
                     <p class="next-title">typr. <svg class="icon icon-arrow-right" aria-hidden="true"><use href="#i-arrow-right"></use></svg></p>
                 </div>
                 <div class="project-media" style="view-transition-name: media-typr">
@@ -229,11 +234,18 @@
             <ul class="footer-links">
                 <li><a href="https://github.com/kianhernando" target="_blank" rel="noopener">GitHub</a></li>
                 <li><a href="https://www.linkedin.com/in/kian-hernando/" target="_blank" rel="noopener">LinkedIn</a></li>
-                <li><a href="mailto:kianhernandowork@gmail.com">E-mail</a></li>
+                <li><a href="mailto:kianhernandowork@gmail.com" data-i18n="email">E-mail</a></li>
             </ul>
         </div>
     </footer>
 
+    <button class="lang-switch" type="button" role="switch" aria-checked="false" aria-label="Japanese"
+        data-i18n-aria-label="lang.switch" data-lang-switch>
+        <span>EN</span>
+        <span>JP</span>
+    </button>
+
+    <script src="../ja.js"></script>
     <script src="../script.js"></script>
 </body>
 </html>
