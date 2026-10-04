@@ -142,10 +142,13 @@ if (typed) {
     localized.push(finish);
 }
 
-const glow = document.querySelector(".hero-glow");
-const glowPointer = glow && glow.querySelector(".hero-glow-pointer");
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-if (glowPointer && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+document.querySelectorAll(".hero-glow").forEach((glow) => {
+    const glowPointer = glow.querySelector(".hero-glow-pointer");
+
+    if (!glowPointer || !finePointer) return;
+
     let x, y, targetX, targetY, last, frame;
 
     function follow(now) {
@@ -162,7 +165,7 @@ if (glowPointer && window.matchMedia("(hover: hover) and (pointer: fine)").match
         (e) => {
             if (e.pointerType === "touch") return;
             const rect = glow.getBoundingClientRect();
-            const inside = e.clientY < rect.bottom && !reduceMotion.matches;
+            const inside = e.clientY >= rect.top && e.clientY < rect.bottom && !reduceMotion.matches;
 
             glow.classList.toggle("is-lit", inside);
             if (!inside) return;
@@ -179,7 +182,7 @@ if (glowPointer && window.matchMedia("(hover: hover) and (pointer: fine)").match
     );
 
     root.addEventListener("pointerleave", () => glow.classList.remove("is-lit"));
-}
+});
 
 const header = document.querySelector("[data-header]");
 const sentinel = document.querySelector("[data-scroll-sentinel]");

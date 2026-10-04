@@ -1046,7 +1046,7 @@ html[lang="ja"] .lang-switch::before {
 }
 
 .contact {
-    text-align: center;
+    scroll-margin-top: calc(-1 * (var(--nav-h) + 1.5rem));
 }
 
 .contact-title {
@@ -1873,22 +1873,9 @@ html[lang="ja"]:not(.i18n-ready) [data-i18n] {
         justify-content: flex-start;
     }
 
-    .contact {
-        text-align: left;
-    }
-
-    .contact-title,
-    .contact-copy {
-        margin-inline: 0;
-    }
-
     .contact-email {
         display: flex;
         justify-content: space-between;
-    }
-
-    .contact-links {
-        justify-content: flex-start;
     }
 
     .gallery {
