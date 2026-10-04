@@ -142,6 +142,45 @@ if (typed) {
     localized.push(finish);
 }
 
+const glow = document.querySelector(".hero-glow");
+const glowPointer = glow && glow.querySelector(".hero-glow-pointer");
+
+if (glowPointer && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    let x, y, targetX, targetY, last, frame;
+
+    function follow(now) {
+        const ease = 1 - Math.exp(-Math.max(0, now - last) / 160);
+        last = now;
+        x += (targetX - x) * ease;
+        y += (targetY - y) * ease;
+        glowPointer.style.translate = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
+        frame = Math.abs(targetX - x) + Math.abs(targetY - y) > 0.5 ? requestAnimationFrame(follow) : 0;
+    }
+
+    window.addEventListener(
+        "pointermove",
+        (e) => {
+            if (e.pointerType === "touch") return;
+            const rect = glow.getBoundingClientRect();
+            const inside = e.clientY < rect.bottom && !reduceMotion.matches;
+
+            glow.classList.toggle("is-lit", inside);
+            if (!inside) return;
+
+            targetX = e.clientX - rect.left;
+            targetY = e.clientY - rect.top;
+            if (x === undefined) [x, y] = [targetX, targetY];
+            if (!frame) {
+                last = performance.now();
+                frame = requestAnimationFrame(follow);
+            }
+        },
+        { passive: true }
+    );
+
+    root.addEventListener("pointerleave", () => glow.classList.remove("is-lit"));
+}
+
 const header = document.querySelector("[data-header]");
 const sentinel = document.querySelector("[data-scroll-sentinel]");
 

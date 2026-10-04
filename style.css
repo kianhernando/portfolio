@@ -22,6 +22,7 @@
 
     --grid-gap: 5rem;
     --grid-line: rgba(255, 255, 255, 0.13);
+    --grid-fade: 7rem;
 
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -205,11 +206,24 @@ ul {
         linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: var(--grid-gap) var(--grid-gap);
     background-position: calc(50% + var(--grid-gap) / 2) 0;
-    -webkit-mask-image: radial-gradient(ellipse 110% 85% at 50% 35%, #000 35%, rgba(0, 0, 0, 0.25) 100%);
-    mask-image: radial-gradient(ellipse 110% 85% at 50% 35%, #000 35%, rgba(0, 0, 0, 0.25) 100%);
+    --bleed: 0px;
+    --mask:
+        radial-gradient(ellipse 110% 85% at 50% 35%, #000 35%, rgba(0, 0, 0, 0.25) 100%),
+        linear-gradient(
+            to bottom,
+            transparent var(--bleed),
+            #000 calc(var(--bleed) + var(--grid-fade)),
+            #000 calc(100% - var(--bleed) - var(--grid-fade)),
+            transparent calc(100% - var(--bleed))
+        );
+    -webkit-mask-image: var(--mask);
+    -webkit-mask-composite: source-in;
+    mask-image: var(--mask);
+    mask-composite: intersect;
 }
 
 .case-page .grid-bg {
+    --bleed: 24px;
     inset: -24px;
     filter: blur(1.5px);
     opacity: 0.5;
@@ -578,28 +592,75 @@ html[lang="ja"] .lang-switch::before {
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24%, #000 50%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 24%, #000 50%, transparent);
 }
 
-.hero-glow::before {
-    content: "";
+.hero-glow span {
     position: absolute;
-    inset: -20% -10% 0;
-    background:
-        radial-gradient(ellipse 45% 40% at 28% 32%, rgba(120, 120, 120, 0.30), transparent 70%),
-        radial-gradient(ellipse 40% 38% at 74% 48%, rgba(161, 161, 161, 0.20), transparent 70%),
-        radial-gradient(ellipse 50% 35% at 50% 78%, rgba(157, 157, 157, 0.12), transparent 70%);
-    filter: blur(20px);
-    animation: glow-drift 22s var(--ease-in-out) infinite alternate;
+    translate: -50% -50%;
+    animation: glow-breathe 7s ease-in-out infinite alternate;
 }
 
-@keyframes glow-drift {
+.hero-glow span:nth-child(1) {
+    left: 24%;
+    top: 30%;
+    width: 108%;
+    height: 96%;
+    background: radial-gradient(closest-side, rgba(120, 120, 120, 0.36), transparent 70%);
+    --dx: 4%;
+    --dy: -3%;
+}
+
+.hero-glow span:nth-child(2) {
+    left: 79%;
+    top: 44%;
+    width: 96%;
+    height: 91%;
+    background: radial-gradient(closest-side, rgba(161, 161, 161, 0.25), transparent 70%);
+    animation-duration: 9s;
+    animation-delay: -5s;
+    --dx: -5%;
+    --dy: 4%;
+}
+
+.hero-glow span:nth-child(3) {
+    left: 50%;
+    top: 76%;
+    width: 120%;
+    height: 84%;
+    background: radial-gradient(closest-side, rgba(157, 157, 157, 0.16), transparent 70%);
+    animation-duration: 11s;
+    animation-delay: -8s;
+    --dx: 3%;
+    --dy: -4%;
+}
+
+.hero-glow .hero-glow-pointer {
+    left: 0;
+    top: 0;
+    width: clamp(28rem, 52vw, 46rem);
+    aspect-ratio: 1;
+    margin: calc(clamp(28rem, 52vw, 46rem) / -2);
+    background: radial-gradient(closest-side, rgba(210, 210, 210, 0.15), transparent);
+    opacity: 0;
+    translate: none;
+    animation: none;
+    transition: opacity 0.9s ease;
+}
+
+.hero-glow.is-lit .hero-glow-pointer {
+    opacity: 1;
+}
+
+@keyframes glow-breathe {
     from {
-        transform: translate3d(-2%, -1%, 0) scale(1);
+        opacity: 0.4;
+        transform: translate3d(var(--dx), var(--dy), 0) scale(0.92);
     }
     to {
-        transform: translate3d(2%, 2%, 0) scale(1.06);
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1.08);
     }
 }
 
@@ -1086,7 +1147,6 @@ html[lang="ja"] .lang-switch::before {
 
 .site-footer {
     border-top: 1px solid var(--line);
-    background: var(--bg);
     color: var(--text-3);
     font-size: 0.9rem;
 }
@@ -1662,7 +1722,7 @@ html[lang="ja"]:not(.i18n-ready) [data-i18n] {
         scroll-behavior: auto;
     }
 
-    .hero-glow::before,
+    .hero-glow span,
     .caret {
         animation: none;
     }
