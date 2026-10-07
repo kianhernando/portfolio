@@ -158,6 +158,7 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#about" data-i18n="nav.about">About</a></li>
+                <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
                 <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
                 <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
                 <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
@@ -181,9 +182,10 @@
     <div class="mobile-menu" id="mobile-menu">
         <nav class="mobile-menu-links" aria-label="Mobile" data-i18n-aria-label="nav.mobile">
             <a href="#about" style="--i: 0" data-i18n="nav.about">About</a>
-            <a href="#projects" style="--i: 1" data-i18n="nav.projects">Projects</a>
-            <a href="#skills" style="--i: 2" data-i18n="nav.skills">Skills</a>
-            <a href="#contact" style="--i: 3" data-i18n="nav.contact">Contact</a>
+            <a href="#experience" style="--i: 1" data-i18n="nav.experience">Experience</a>
+            <a href="#projects" style="--i: 2" data-i18n="nav.projects">Projects</a>
+            <a href="#skills" style="--i: 3" data-i18n="nav.skills">Skills</a>
+            <a href="#contact" style="--i: 4" data-i18n="nav.contact">Contact</a>
         </nav>
         <div class="mobile-menu-footer">
             <a class="btn btn-primary" href="assets/Kian%20Hernando.pdf" target="_blank" rel="noopener"><svg
@@ -290,6 +292,74 @@
             </div>
         </section>
 
+        <section class="section section-plain" id="experience" aria-labelledby="experience-title">
+            <div class="container">
+                <h2 class="section-title" id="experience-title" data-i18n="experience.title">Where I have worked</h2>
+                <!-- Logos: drop a square JPG at each assets/experience/*.jpg path below. Until a file
+                     exists, script.js removes the <img> and the initials show instead.
+                     Months: script.js counts them from data-since (and data-until, once a role has
+                     ended) as YYYY-MM; the number written here is only the no-JavaScript fallback. -->
+                <ol class="timeline">
+                    <li class="timeline-item is-current" data-reveal style="--i: 0">
+                        <p class="timeline-date" data-i18n="exp.csub.date">Jan 2025 - Present</p>
+                        <div class="timeline-card">
+                            <span class="timeline-logo" data-logo aria-hidden="true">CSUB<img
+                                    src="assets/experience/csub.jpg" alt="" width="48" height="48" loading="lazy"></span>
+                            <div>
+                                <h3 class="timeline-role" data-i18n="exp.csub.role">Instructional Student Assistant</h3>
+                                <p class="timeline-org" data-i18n="exp.csub.org">California State University, Bakersfield</p>
+                                <p class="timeline-length" data-since="2025-01">22 months</p>
+                                <ul class="timeline-stack" aria-label="Tech stack" data-i18n-aria-label="tags.label">
+                                    <li><img src="assets/images/C++.webp" alt="C++" title="C++"
+                                            width="26" height="26" loading="lazy"></li>
+                                    <li><img src="assets/images/Linux.webp" alt="Linux" title="Linux"
+                                            width="26" height="26" loading="lazy"></li>
+                                    <li><img src="assets/images/Vim.webp" alt="Vim" title="Vim"
+                                            width="26" height="26" loading="lazy"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-item" data-reveal style="--i: 1">
+                        <p class="timeline-date" data-i18n="exp.fwd.date">Jul 2025 - Jan 2026</p>
+                        <div class="timeline-card">
+                            <span class="timeline-logo" data-logo aria-hidden="true">FWD<img
+                                    src="assets/experience/fwd-dynamics.jpg" alt="" width="48" height="48" loading="lazy"></span>
+                            <div>
+                                <h3 class="timeline-role" data-i18n="exp.fwd.role">UI/UX Designer and Web Developer</h3>
+                                <p class="timeline-org" data-i18n="exp.fwd.org">FWD: Dynamics</p>
+                                <p class="timeline-length" data-since="2025-07" data-until="2026-01">7 months</p>
+                                <ul class="timeline-stack" aria-label="Tech stack" data-i18n-aria-label="tags.label">
+                                    <li><img class="on-dark" src="assets/images/Astro.webp" alt="Astro" title="Astro"
+                                            width="26" height="26" loading="lazy"></li>
+                                    <li><img src="assets/images/TypeScript.webp" alt="TypeScript" title="TypeScript"
+                                            width="26" height="26" loading="lazy"></li>
+                                    <li><img src="assets/images/Node.js.webp" alt="Node.js" title="Node.js"
+                                            width="26" height="26" loading="lazy"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-item is-current" data-reveal style="--i: 2">
+                        <p class="timeline-date" data-i18n="exp.ninjas.date">Oct 2025 - Present</p>
+                        <div class="timeline-card">
+                            <span class="timeline-logo" data-logo aria-hidden="true">CN<img
+                                    src="assets/experience/code-ninjas.jpg" alt="" width="48" height="48" loading="lazy"></span>
+                            <div>
+                                <h3 class="timeline-role" data-i18n="exp.ninjas.role">Code Sensei</h3>
+                                <p class="timeline-org" data-i18n="exp.ninjas.org">Code Ninjas</p>
+                                <p class="timeline-length" data-since="2025-10">13 months</p>
+                                <ul class="timeline-stack" aria-label="Tech stack" data-i18n-aria-label="tags.label">
+                                    <li><img src="assets/images/JavaScript.webp" alt="JavaScript" title="JavaScript"
+                                            width="26" height="26" loading="lazy"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
         <section class="section" id="projects" aria-labelledby="projects-title">
             <div class="container">
                 <h2 class="section-title" id="projects-title" data-i18n="projects.title">What I have worked on</h2>
@@ -304,7 +374,6 @@
                                 </video>
                             </div>
                             <div class="project-body">
-                                <p class="project-kind" data-i18n="kind.live">Live web app</p>
                                 <h3 class="project-title">QuickQR <svg class="icon icon-arrow-up-right"
                                         aria-hidden="true">
                                         <use href="#i-arrow-up-right"></use>
@@ -329,7 +398,6 @@
                                 </video>
                             </div>
                             <div class="project-body">
-                                <p class="project-kind" data-i18n="kind.game">Game</p>
                                 <h3 class="project-title">ジャンケン: A One-Handed Journey <svg
                                         class="icon icon-arrow-up-right" aria-hidden="true">
                                         <use href="#i-arrow-up-right"></use>
@@ -355,7 +423,6 @@
                                 </video>
                             </div>
                             <div class="project-body">
-                                <p class="project-kind" data-i18n="kind.web">Web app</p>
                                 <h3 class="project-title">Pokémon TCG Pack Opener <svg class="icon icon-arrow-up-right"
                                         aria-hidden="true">
                                         <use href="#i-arrow-up-right"></use>
@@ -380,7 +447,6 @@
                                 </video>
                             </div>
                             <div class="project-body">
-                                <p class="project-kind" data-i18n="kind.web">Web app</p>
                                 <h3 class="project-title">typr. <svg class="icon icon-arrow-up-right"
                                         aria-hidden="true">
                                         <use href="#i-arrow-up-right"></use>
@@ -473,7 +539,7 @@
                 <h2 class="contact-title" id="contact-title" data-reveal data-i18n="contact.title">Let's build something
                     together!</h2>
                 <p class="contact-copy" data-reveal style="--i: 1">
-                    <span data-i18n="contact.line1">I'm always looking for SWE opportunities and to discuss about future
+                    <span data-i18n="contact.line1">I'm always looking for SWE opportunities and to discuss future
                         projects!</span>
                     <span data-i18n="contact.line2">My inbox is open at any time!</span>
                 </p>

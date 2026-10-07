@@ -351,6 +351,24 @@ reduceMotion.addEventListener("change", (e) => {
     if (e.matches) videos.forEach((video) => video.pause());
 });
 
+document.querySelectorAll("[data-since]").forEach((el) => {
+    const now = new Date();
+    const [fromYear, fromMonth] = el.dataset.since.split("-").map(Number);
+    const [toYear, toMonth] = el.dataset.until
+        ? el.dataset.until.split("-").map(Number)
+        : [now.getFullYear(), now.getMonth() + 1];
+    const months = (toYear - fromYear) * 12 + (toMonth - fromMonth) + 1;
+    const update = () => (el.innerHTML = months + html("exp.months", months === 1 ? " month" : " months"));
+
+    localized.push(update);
+    update();
+});
+
+document.querySelectorAll("[data-logo] img").forEach((img) => {
+    if (img.complete && !img.naturalWidth) img.remove();
+    else img.addEventListener("error", () => img.remove());
+});
+
 const lazyImages = document.querySelectorAll('img[loading="lazy"]');
 
 if (lazyImages.length && !saveData) {
