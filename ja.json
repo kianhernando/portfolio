@@ -1,9 +1,4 @@
-// Japanese copy for the language switch. Each key matches a data-i18n,
-// data-i18n-aria-label, or data-i18n-alt attribute in the HTML (or a lookup in
-// script.js). Furigana is written as {漢字|かんじ}, which script.js turns into
-// <ruby>漢字<rt>かんじ</rt></ruby>. In the big headings, each <span> is a phrase
-// that stays on one line when the heading wraps.
-window.JA = {
+{
     "skip": "{本文|ほんぶん}へスキップ",
     "nav.primary": "メイン",
     "nav.mobile": "モバイル",
@@ -99,5 +94,5 @@ window.JA = {
     "typr.title": "typr.：ミニマルなタイピング速度テスト | Kian Hernando",
     "typr.lede": "Monkeytypeにインスパイアされた、ミニマルなウェブタイピングテスト。",
     "typr.try": "typr.を{試|ため}す",
-    "typr.video": "typr.の画面録画",
-};
+    "typr.video": "typr.の画面録画"
+}

@@ -4,10 +4,30 @@ root.classList.add("js");
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-const JA = window.JA || {};
+// Japanese copy lives in ja.json and is only fetched once Japanese is asked for.
+// Each key matches a data-i18n, data-i18n-aria-label, or data-i18n-alt attribute
+// in the HTML (or a lookup below). Furigana is written as {漢字|かんじ}, which
+// becomes <ruby>漢字<rt>かんじ</rt></ruby>. In the big headings, each <span> is a
+// phrase that stays on one line when the heading wraps.
+const JA_URL = new URL("ja.json", document.currentScript.src);
 const RUBY = /\{([^|{}]+)\|([^{}]+)\}/g;
 const localized = [];
+let JA = {};
+let jaRequest;
 let lang = root.lang === "ja" ? "ja" : "en";
+
+function loadJA() {
+    if (!jaRequest) {
+        jaRequest = fetch(JA_URL)
+            .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+            .then((data) => (JA = data))
+            .catch((error) => {
+                jaRequest = null;
+                throw error;
+            });
+    }
+    return jaRequest;
+}
 
 const ruby = (source) => source.replace(RUBY, "<ruby>$1<rt>$2</rt></ruby>");
 const html = (key, en) => (lang === "ja" && key in JA ? ruby(JA[key]) : en);
@@ -33,8 +53,15 @@ if (pageTitle) {
     localized.push(() => (document.title = text(pageTitle.dataset.i18n, en)));
 }
 
-if (lang === "ja") localized.forEach((update) => update());
-root.classList.add("i18n-ready");
+const translate = () => localized.forEach((update) => update());
+
+const ready = (lang === "ja" ? loadJA().then(translate) : Promise.resolve())
+    .catch(() => {
+        lang = "en";
+        root.lang = "en";
+        translate();
+    })
+    .then(() => root.classList.add("i18n-ready"));
 
 function savedLang() {
     try {
@@ -44,7 +71,15 @@ function savedLang() {
     }
 }
 
-function setLang(next) {
+async function setLang(next) {
+    if (next === "ja") {
+        try {
+            await loadJA();
+        } catch {
+            return;
+        }
+    }
+
     const probe = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
     const anchor = (probe && probe.closest("[data-i18n]")) || probe;
     const top = anchor ? anchor.getBoundingClientRect().top : 0;
@@ -54,7 +89,7 @@ function setLang(next) {
     try {
         localStorage.setItem("lang", lang);
     } catch {}
-    localized.forEach((update) => update());
+    translate();
 
     if (anchor) {
         window.scrollBy({ top: anchor.getBoundingClientRect().top - top, behavior: "instant" });
@@ -87,7 +122,7 @@ const typed = document.getElementById("typed");
 
 if (typed) {
     const getWords = () =>
-        (lang === "ja" ? JA["hero.typed"] : ["a Developer", "an Engineer", "Kian!"]).map((word) =>
+        ((lang === "ja" && JA["hero.typed"]) || ["a Developer", "an Engineer", "Kian!"]).map((word) =>
             word.match(/\{[^{}]*\}|./gu).map(ruby)
         );
     let words = getWords();
@@ -133,13 +168,16 @@ if (typed) {
 
     const intro = root.classList.contains("intro");
 
-    if (reduceMotion.matches || !intro) {
-        finish();
-    } else {
-        timer = setTimeout(type, 700);
-    }
+    ready.then(() => {
+        if (reduceMotion.matches || !intro) {
+            finish();
+        } else {
+            words = getWords();
+            timer = setTimeout(type, 700);
+        }
 
-    localized.push(finish);
+        localized.push(finish);
+    });
 }
 
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -278,8 +316,22 @@ if ("IntersectionObserver" in window) {
 }
 
 const videos = document.querySelectorAll("video[data-autoplay]");
+const saveData = Boolean(navigator.connection && navigator.connection.saveData);
 
 if ("IntersectionObserver" in window) {
+    const buffer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(({ target, isIntersecting }) => {
+                if (!isIntersecting) return;
+                target.preload = "auto";
+                buffer.unobserve(target);
+            });
+        },
+        { rootMargin: "100% 0px" }
+    );
+
+    if (!reduceMotion.matches && !saveData) videos.forEach((video) => buffer.observe(video));
+
     const player = new IntersectionObserver(
         (entries) => {
             entries.forEach(({ target, isIntersecting }) => {
@@ -298,6 +350,20 @@ if ("IntersectionObserver" in window) {
 reduceMotion.addEventListener("change", (e) => {
     if (e.matches) videos.forEach((video) => video.pause());
 });
+
+const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+if (lazyImages.length && !saveData) {
+    const warm = () => lazyImages.forEach((img) => (img.loading = "eager"));
+
+    window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) {
+            requestIdleCallback(warm, { timeout: 2000 });
+        } else {
+            setTimeout(warm, 300);
+        }
+    });
+}
 
 document.querySelectorAll("[data-media-toggle]").forEach((button) => {
     const video = button.parentElement.querySelector("video");
