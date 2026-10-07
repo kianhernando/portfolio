@@ -1,10 +1,10 @@
-# Kian Hernando's Portfolio Website
+# Portfolio by Kian Hernando
 
 ## About me
 
 Hi there, I'm Kian! I used to be a Nursing student, but now I am studying Computer Science at Cal State Bakersfield! I love creating impactful apps and websites that are beneficial for others, while being fun to use!
 
-## Technical Skills
+## Tech Stack
 
 ### Coding Languages
 C, C++, Python, HTML/CSS, JavaScript, TypeScript, SQL, PHP  
